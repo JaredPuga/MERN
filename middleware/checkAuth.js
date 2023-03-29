@@ -8,7 +8,7 @@ const checkAuth = async(req, res, next) => {
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         try {
             token = req.headers.authorization.split(' ')[1]
-            console.log(token);
+            //console.log(token);
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
@@ -22,7 +22,7 @@ const checkAuth = async(req, res, next) => {
 
     if(!token) {
         const error = new Error('Token no válido')
-        res.status(401).json({mns: error.message})
+        return res.status(401).json({mns: error.message})
     }
 
     next()
